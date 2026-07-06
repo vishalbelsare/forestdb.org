@@ -2,7 +2,7 @@
 layout: model
 title: Black Lives Matter
 model-status: code
-model-category: Reasoning about Reasoning
+model-category: Language and Pragmatics
 model-tags: language, pragmatics, exhaustivity
 model-language: webppl
 model-language-version: v0.9.7
@@ -178,7 +178,7 @@ pragmaticListener("blm","which_lm")
 
 ## Model 3: QUD inference
 
-In this model, rather than assuming a particular QUD, we let the model infer the QUD jointly with the state. Weird: "which_lm" generally inferred to be more likely QUD unless either QUD prior skewed, and even then white lives matter are inferred to be more likely not to matter than to matter. White lives are only more likely to matter than not matter if a priori both black and white lives mattering is the most likely state.
+In this model, rather than assuming a particular QUD, we let the model infer the QUD jointly with the state. Weird: "which_lm" generally inferred to be more likely QUD unless either QUD prior skewed, and even then white lives are inferred to be more likely not to matter than to matter. White lives are only more likely to matter than not matter if a priori both black and white lives mattering is the most likely state.
 
 ~~~~
 var alpha = 1

@@ -2,6 +2,8 @@
 layout: model
 title: RSA prior inference
 model-language: webppl
+model-category: Language and Pragmatics
+model-status: code
 ---
 
 

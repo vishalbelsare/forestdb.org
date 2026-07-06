@@ -2,6 +2,8 @@
 layout: model
 title: Pronouns
 model-language: webppl
+model-category: Language and Pragmatics
+model-status: code
 ---
 
 A model of pronoun ambiguity resolution by Alandi Bates and Cheryl Choi:

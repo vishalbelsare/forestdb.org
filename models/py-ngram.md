@@ -1,9 +1,8 @@
 ---
 layout: model
 title: Pitman-Yor N-Gram
-model-status: code-fail
-model-status-verbose: The program doesn't halt with probability 1?
-model-category: Nonparametric Models
+model-status: code
+model-category: Bayesian Nonparametrics
 model-tags: dp, nonparametrics, language
 model-language: church
 ---
@@ -34,7 +33,9 @@ This is a hierarchical Bayesian language model based on the Pitman-Yor process.
             (pair update history)
             (pair update (take history (- (length history) 1))))))
     
-    (define prefix->a (mem (lambda (prefix-length) (beta 1.0 1.0))))
+    ;; Discount bounded to [0, .3]: for larger discounts, the stick weights
+    ;; (beta (- 1 a) ...) get so small that pick-a-stick overflows the stack.
+    (define prefix->a (mem (lambda (prefix-length) (* 0.3 (beta 1.0 1.0)))))
     (define prefix->b (mem (lambda (prefix-length) (gamma 1.0 1.0))))
     (define draw-word (lambda () (uniform-draw dictionary)))
     
@@ -46,7 +47,7 @@ This is a hierarchical Bayesian language model based on the Pitman-Yor process.
           (lambda ()
             (if (null? prefix)
                 (draw-word)
-                (prefix->next-word (rest prefix))))))))
+                (prefix->next-word (but-last prefix))))))))
     
     (define prefix->next-word
       (lambda (prefix)

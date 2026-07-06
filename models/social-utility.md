@@ -1,9 +1,13 @@
 ---
 layout: model
 title: Reasoning about social groups
+model-status: code
 model-language: webppl
 model-language-version: v0.9.7
+model-category: Agents, Games, and Social Reasoning
 ---
+
+A collection of models exploring how an agent like Alice infers her own utility for different restaurants and, later, her group membership among a population of agents, combining direct reward signals from her own choices with what she observes about others' choices and shared traits.
 
 Inferring properties of one group
 ---------------------------------
@@ -12,7 +16,7 @@ Suppose there are $M$ restaurants, which generate noisy reward signals
 $r_j \in \{0, 1\}$. Each agent $a_i$ in the population assigns some
 subjective utility $u_j$ to each restaurant $j$, such that $u_j =
 P(r_j = 1)$. These subjective utilities are drawn from a shared normal
-distribution, so all agents have relatively similar utilities
+distribution, so all agents have relatively similar utility
 functions. We will model a particular agent, Alice, as she infers her
 own utility function. She uses two sources of information. First,
 Alice assumes that all other agents know their own utility and decide
@@ -132,7 +136,7 @@ console.log(expectation(results, function(x) {return x['groupParams']['groupMean
 console.log(expectation(results, function(x) {return x['groupParams']['groupSD']}))
 ~~~~
 
-Despite the fact Alice doesn't explicitly observe any information about the Stirfry Shack, she nonetheless forms strong beliefs about it by observing the actions of agents that she believes belong to her group. By comparing evidence1 to evidence2, we see that additional evidence strengthens Alice's belief and also leads to an inference that the SD of her group must be quite large (otherwise it's hard to explain why no one else is choosing the Burger Barn). By comparing evidence2 to evidence3, we see that observing just a few mixed signals (i.e. a bad experience at Burger Barn herself, and social evidence of some other choosing Burger Barn), her beliefs about SD shift much lower.
+Despite the fact Alice doesn't explicitly observe any information about the Stirfry Shack, she nonetheless forms strong beliefs about it by observing the actions of agents that she believes belong to her group. By comparing evidence1 to evidence2, we see that additional evidence strengthens Alice's belief and also leads to an inference that the SD of her group must be quite large (otherwise it's hard to explain why no one else is choosing the Burger Barn). By comparing evidence2 to evidence3, we see that after observing just a few mixed signals (i.e. a bad experience at Burger Barn herself, and social evidence of some others choosing Burger Barn), her beliefs about SD shift much lower.
 
 Jointly inferring membership in & properties of multiple groups (broken)
 -----------------------------------------------------------
@@ -170,18 +174,18 @@ var normalizeVals = function(agentVals){
 var makeChoiceERP = function(utility) {
   var ps = normalizeVals(utility);
   var vs = _.keys(utility);
-  return categoricalERP(ps, vs);
+  return Categorical({ps: ps, vs: vs});
 };
 
 var choiceLikelihood = function(ownUtility, choice) {
   var choiceERP = makeChoiceERP(ownUtility);
-  return choiceERP.score([], choice);
+  return choiceERP.score(choice);
 };
 
 var otherLikelihoods = function(otherUtilities, otherChoices) {
   var likelihoods = map2(function(otherUtility, otherChoice) {
     var otherChoiceERP = makeChoiceERP(otherUtility);
-    return otherChoiceERP.score([], otherChoice);
+    return otherChoiceERP.score(otherChoice);
   }, otherUtilities, otherChoices);
   return sum(likelihoods);
 };
@@ -245,7 +249,7 @@ var infer = function(evidence) {
     var beliefs = infer(butLast(evidence));
 
     // What beliefs would make this reward signal most likely?
-    factor(bernoulliERP.score([beliefs.ownUtility[newEvidence.self.choice]],
+    factor(Bernoulli({p: beliefs.ownUtility[newEvidence.self.choice]}).score(
                               newEvidence.self.rewardSignal));
 
     // What beliefs would make my friend's choices most likely?
@@ -289,7 +293,7 @@ Note that evidence2 now constitutes fairly strong evidence that there are two gr
 Stereotyping (broken)
 ---------------------------------
 
-Next, we add incidental features to the agents. In the real world, we don't always get to observe the choices of other agents, but we do observe perceptual features like skin color, hair color, and the team name on a sports jersey. Work on stereotyping and ingroup-outgroup perception suggests that we expect many groups to share such features. To incorporate this aspect of an intuitive theory of groups, we sample a "feature probability" for each group. If it is 1, then we expect all agents in the group to have that feature. If it is .5, we expect roughly half of the agents to have that features. Our agent then takes these stable perceptual traits into account when inferring group membership and utility.
+Next, we add incidental features to the agents. In the real world, we don't always get to observe the choices of other agents, but we do observe perceptual features like skin color, hair color, and the team name on a sports jersey. Work on stereotyping and ingroup-outgroup perception suggests that we expect many groups to share such features. To incorporate this aspect of an intuitive theory of groups, we sample a "feature probability" for each group. If it is 1, then we expect all agents in the group to have that feature. If it is .5, we expect roughly half of the agents to have that feature. Our agent then takes these stable perceptual traits into account when inferring group membership and utility.
 
 ~~~~
 
@@ -322,18 +326,18 @@ var normalizeVals = function(agentVals){
 var makeChoiceERP = function(utility) {
   var ps = normalizeVals(utility);
   var vs = _.keys(utility);
-  return categoricalERP(ps, vs);
+  return Categorical({ps: ps, vs: vs});
 };
 
 var choiceLikelihood = function(ownUtility, choice) {
   var choiceERP = makeChoiceERP(ownUtility);
-  return choiceERP.score([], choice);
+  return choiceERP.score(choice);
 };
 
 var otherChoiceLikelihoods = function(beliefs, otherChoices) {
   var likelihoods = map2(function(otherUtility, otherChoice) {
     var otherChoiceERP = makeChoiceERP(otherUtility);
-    return otherChoiceERP.score([], otherChoice);
+    return otherChoiceERP.score(otherChoice);
   }, beliefs.otherUtilities, otherChoices);
   return sum(likelihoods);
 };
@@ -342,7 +346,7 @@ var featureLikelihoods = function(groupParams, groupMembership, features) {
   var likelihoods = map2(function(agentID, feature) {
     var group = groupMembership[agentID];
     var featureProb = groupParams[group].groupFeatureProb;
-    return bernoulliERP.score([featureProb], feature);
+    return Bernoulli({p: featureProb}).score( feature);
   }, _.range(groupMembership.length), features);
   return sum(likelihoods);
 };
@@ -410,7 +414,7 @@ var infer = function(input) {
     var beliefs = infer(_.extend(input, {evidence : butLast(input.evidence)}));
 
     // What beliefs would make this reward signal most likely?
-    factor(bernoulliERP.score([beliefs.ownUtility[newEvidence.self.choice]],
+    factor(Bernoulli({p: beliefs.ownUtility[newEvidence.self.choice]}).score(
                               newEvidence.self.rewardSignal));
 
     // What beliefs would make my friend's choices most likely?
@@ -622,7 +626,7 @@ var utilityMean = function(knowledge) {
       return [v.utility[key]];
     });
   }, options);
-  return _.object(options, means);
+  return _.zipObject(options, means);
 };
 
 
@@ -640,7 +644,7 @@ var observe = function(utility, restaurant) {
 var makeChoiceERP = function(utility) {
   var ps = normalizeVals(utility);
   var vs = _.keys(utility);
-  return categoricalERP(ps, vs);
+  return Categorical({ps: ps, vs: vs});
 };
 
 // Sample a choice for all agents in the population
@@ -680,7 +684,7 @@ var infer = function(agent, ownChoice, otherChoices) {
     var expectedChoiceERP = makeChoiceERP(utility);
 
     // Take true reward signal into account
-    factor(bernoulliERP.score([utility[ownChoice.choice]],
+    factor(Bernoulli({p: utility[ownChoice.choice]}).score(
                               ownChoice.rewardSignal));
 
     // Try to maximize log-likelihood of others' choices,
@@ -690,7 +694,7 @@ var infer = function(agent, ownChoice, otherChoices) {
                              filter(function(a) {return a[1];},
                                     zip(otherChoices, groupAssignments)));
     var otherLikelihoods = map(function(otherChoice) {
-      return expectedChoiceERP.score([], otherChoice);
+      return expectedChoiceERP.score(otherChoice);
     }, relevantOthers);
     factor(otherLikelihoods.length === 0 ?
            -Infinity :
@@ -769,7 +773,7 @@ var utilityMean = function(utilityERP) {
       return [v[key]];
     });
   }, options);
-  return _.object(options, means);
+  return _.zipObject(options, means);
 };
 
 var normalizeVals = function(agentVals){
@@ -801,7 +805,7 @@ var observe = function(utility, restaurant) {
 var makeChoiceERP = function(utility) {
   var ps = normalizeVals(utility);
   var vs = _.keys(utility);
-  return categoricalERP(ps, vs);
+  return Categorical({ps: ps, vs: vs});
 };
 
 // Sample a choice for all agents in the population
@@ -823,12 +827,12 @@ var inferUtility = function(agent, ownChoice, otherChoices) {
       var expectedChoiceERP = makeChoiceERP(utility);
 
       // Take true reward signal into account
-      factor(bernoulliERP.score([utility[ownChoice.choice]],
+      factor(Bernoulli({p: utility[ownChoice.choice]}).score(
                                 ownChoice.rewardSignal));
 
       // Try to maximize log-likelihood of others' choices
       var otherLikelihoods = map(function(otherChoice) {
-        return expectedChoiceERP.score([], otherChoice);
+        return expectedChoiceERP.score(otherChoice);
       }, otherChoices);
       factor(sum(otherLikelihoods));
 
@@ -930,8 +934,8 @@ var restaurantPrior = map(function(restaurant) {
 var createAgent = function(name, agentNames) {
   var otherAgents = getOtherAgents(name, agentNames);
   var otherWeights = repeat(otherAgents.length, function(){return .5;});
-  var relationships = _.object(otherAgents, otherWeights);
-  return {values: _.object(restaurants, restaurantPrior), 
+  var relationships = _.zipObject(otherAgents, otherWeights);
+  return {values: _.zipObject(restaurants, restaurantPrior), 
           relationships: relationships};
 };
 
@@ -939,7 +943,7 @@ var initializeAgents = function(agentNames) {
   var agentProperties = map(function(agent) {
     return createAgent(agent, agentNames);
   }, agentNames);
-  return _.object(agentNames, agentProperties);
+  return _.zipObject(agentNames, agentProperties);
 };
 
 var observe = function(restaurant) {
@@ -1058,7 +1062,7 @@ var initSocWeight = .5;
 // initialize with uniform prior and neutral relationships ([1,1])
 var createAgent = function(name) {
   var otherAgents = getOtherAgents(agentList, name);
-  var relationships = _.object(otherAgents, [initSocWeight,initSocWeight]);
+  var relationships = _.zipObject(otherAgents, [initSocWeight,initSocWeight]);
   return {
     values: restaurantPrior,
     relationships: relationships
@@ -1069,7 +1073,7 @@ var initializeAgents = function() {
   var agentProperties = map(function(agent) {
     return createAgent(agent);
   }, agentList);
-  return _.object(agentList, agentProperties);
+  return _.zipObject(agentList, agentProperties);
 };
 
 var observe = function(restaurant) {
@@ -1114,7 +1118,7 @@ var calcUtility = function(possibility, info) {
 var updateRelationships = function(agentProps, info){
   return mapObject(function(otherName, otherWeight) {
     var otherObs = info.socialObs[otherName];
-    var choiceVal = Math.exp(agentProps.values.score([], otherObs.choice));
+    var choiceVal = Math.exp(agentProps.values.score(otherObs.choice));
     var newWeight = otherWeight * (choiceVal + 2/3);
     return newWeight > 1 ? 1 : newWeight;
   }, info.relationships);

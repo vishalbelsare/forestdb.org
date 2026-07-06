@@ -1,0 +1,17 @@
+{
+  "name": "forest-test-models",
+  "private": true,
+  "description": "Headless smoke tests for the webppl models on forestdb.org",
+  "scripts": {
+    "test": "node --test assert-report.test.js runner.test.js",
+    "check": "node runner.js --timeout 120 --concurrency 4 && node assert-report.js"
+  },
+  "dependencies": {
+    "webppl-0-6-1": "npm:webppl@0.6.1",
+    "webppl-0-9-6": "npm:webppl@0.9.6",
+    "webppl-0-9-7": "npm:webppl@0.9.7",
+    "webppl-0-9-9": "npm:webppl@0.9.9",
+    "webppl-0-9-13": "npm:webppl@0.9.13",
+    "webppl-0-9-15": "npm:webppl@0.9.15"
+  }
+}

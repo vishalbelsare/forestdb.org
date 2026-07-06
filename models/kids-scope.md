@@ -2,6 +2,8 @@
 layout: model
 title: kids-scope
 model-language: webppl
+model-category: Language and Pragmatics
+model-status: code
 ---
 
 **A model of scope ambiguity resolution for *every-not* and *two-not* utterances.**

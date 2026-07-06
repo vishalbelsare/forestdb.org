@@ -1,12 +1,13 @@
 ---
 layout: model
 title: Pitman-Yor Process
-model-status: code-fail
-model-status-verbose: Doesn't halt with probability 1?
-model-category: Nonparametric Models
+model-status: code
+model-category: Bayesian Nonparametrics
 model-tags: dp, nonparametrics
 model-language: church
 ---
+
+The Pitman-Yor process, a two-parameter generalization of the Dirichlet process's stick-breaking construction, gets implemented here as a stochastic memoizer for arbitrary functions. Applying it to the Gaussian distribution produces repeated draws whose clustering pattern follows the Pitman-Yor process's characteristic power-law tail.
 
     (define (pick-a-stick sticks J)
       (if (flip (sticks J))

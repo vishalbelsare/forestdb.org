@@ -1,6 +1,9 @@
 ---
+title: Teleological Explanations
 layout: model
 model-language: church
+model-category: Graphical Models and Causality
+model-status: code
 ---
 
 Playing around with modeling teleological explanation. Teleological explanations seem to have some implicit designer who chooses an action (based on their goal), which results in the explanandum being true.

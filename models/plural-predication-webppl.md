@@ -3,12 +3,12 @@ layout: model
 title: WebPPL version of Plural Predication model
 model-status: code
 model-language: webppl
-model-language-version: pre-v0.7
+model-category: Language and Pragmatics
 ---
 
-This is the WebPPL version of the original Church Plural Predication model. It doesn't run.
+This is the WebPPL version of the original Church Plural Predication model. As written, it does not run (the box below is shown statically; see the diagnosis after it).
 
-~~~~
+~~~~ norun
 // helper functions
 
 // error function
@@ -71,7 +71,7 @@ var pluralPredication = function(numberObjects,
   // possible object sizes
   var objects = [3,4];
   var objectPrior = function() {
-    uniformDraw(objects);
+    return uniformDraw(objects);
   }
 
   // build states with n many objects
@@ -179,7 +179,9 @@ print(pluralPredication(3,"high",true,"ambiguous-pos"))
 print(pluralPredication(3,"high",false,"ambiguous-pos"))
 ~~~~
 
-The problem is the deterministic semantics in the distributive interpretation, which creates zero-probability events (that Church, for some reason, can handle..):
+*Editorial note (2026):* the port originally had two separate problems. First, `objectPrior` was missing a `return`, so every sampled state was `[undefined, ...]` and *all* paths had probability zero (this is now fixed above and below). Second, with that fixed, the strict-semantics model still fails in WebPPL: when `distThetaPos` is 4, no state of 3s and 4s satisfies the `each` reading, so the literal listener's `Enumerate` has empty support, which WebPPL treats as a hard error while Church's enumeration tolerated it. That is the problem the rest of this page discusses.
+
+The problem is the deterministic semantics in the distributive interpretation, which creates zero-probability events (that Church, for some reason, can handle...):
 
 ~~~~
   var distInterpretationPos = function(state, distTheta) {
@@ -261,7 +263,7 @@ var pluralPredication = function(numberObjects,
   // possible object sizes
   var objects = [3,4];
   var objectPrior = function() {
-    uniformDraw(objects);
+    return uniformDraw(objects);
   }
 
   // build states with n many objects
@@ -293,7 +295,7 @@ var pluralPredication = function(numberObjects,
   }
 
   var distInterpretationPos = function(state, distTheta) {
-        return all(function(x){x > distTheta}, state) ? true : false
+     return all(function(x){x > distTheta}, state) ? flip(0.99) : flip(0.01)
   }
 
   // meaning function
@@ -371,4 +373,4 @@ print(pluralPredication(3,"high",false,"ambiguous-pos"))
 
 Curiously, if I weaken the semantics in the original Church model, I get the same (unexpected) qualitative predictions from the WebPPL model.
 
-So, something Church does with handling zero-probability events got us our orginal results. The hope is that if I can understand what that thing is, we can start to understand how the model ought to be structured.
+So, something Church does with handling zero-probability events got us our original results. The hope is that if I can understand what that thing is, we can start to understand how the model ought to be structured.

@@ -2,6 +2,8 @@
 layout: model
 title: Progressive shift
 model-language: webppl
+model-category: Language and Pragmatics
+model-status: code
 ---
 
 A model of progressive vs. imperfective aspect by Becky Jarvis and Gunnar Lund:

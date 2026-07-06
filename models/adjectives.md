@@ -2,16 +2,14 @@
 layout: model
 title: Adjectives
 model-status: code
-model-category: Reasoning about Reasoning
+model-category: Language and Pragmatics
 model-tags: linguistics, pragmatics
 model-language: webppl
 model-language-version: pre-v0.7
 ---
 
-<script src="http://web.stanford.edu/~erindb/webppl-viz/webppl.min.js"></script>  
-<link rel="stylesheet" href="http://web.stanford.edu/~erindb/webppl-viz/viz.css">
 
-A model for the adjective "expensive" for coffee makers, headphones, laptops, sweaters, and headphones, as presented in Ref:Lassiter2013adj.
+A model for the adjective "expensive" for coffee makers, headphones, laptops, sweaters, and watches, as presented in Ref:Lassiter2013adj.
 
 ## Adjective model
 
@@ -114,10 +112,10 @@ var speakerERP = cache(function(price, theta, item) {
 
 var listenerERP = function(utterance, item) {
   var price_prior = prior(item);
-  var theta_prior = theta_prior(item);
+  var thetaPrior = theta_prior(item);
   return ParticleFilter(function() {
     var price = price_prior();
-    var theta = theta_prior();
+    var theta = thetaPrior();
     factor( alpha * speakerERP(price, theta, item).score([], utterance) );
     return {
       price: price,
@@ -146,7 +144,7 @@ map(print_graph, items);
 
 ## Priors on prices
 
-In our [prior elicitation experiment](http://web.stanford.edu/~erindb/sorites-analysis/experiments/exp1-prior/morebins.html), we asked participants to create a binned histogram of prices for 5 different kinds of objects (*coffee maker*, *headphones*, *laptop*, *sweater*, *watch*). Average responses are shown below and used as background data for our adjectives model.
+In our [prior elicitation experiment](https://web.archive.org/web/2016/http://web.stanford.edu/~erindb/sorites-analysis/experiments/exp1-prior/morebins.html), we asked participants to create a binned histogram of prices for 5 different kinds of objects (*coffee maker*, *headphones*, *laptop*, *sweater*, *watch*). Average responses are shown below and used as background data for our adjectives model.
 
 ~~~
 // experiment data is in fold

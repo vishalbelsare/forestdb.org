@@ -2,11 +2,13 @@
 layout: model
 title: CCG scope ambiguity
 model-language: webppl
+model-category: Language and Pragmatics
+model-status: code
 ---
 
 **A model of scope ambiguity using a combinatory categorical grammar and the RSA framework, by Carina Kaltenbach and Nicola Estrefallaces.**
 
-This model is based on a semantic parser combined with the RSA framework by Goodman and Stuhlmüller (http://dippl.org/examples/zSemanticPragmaticMashup.html). In addition it defines new lexical entries and adds a parameter "scope" to resolve scope ambiguity in sentences like "All of the blond people are not nice". 
+This model is based on a semantic parser combined with the RSA framework by Goodman and Stuhlmüller (<http://dippl.org/examples/zSemanticPragmaticMashup.html>). In addition it defines new lexical entries and adds a parameter "scope" to resolve scope ambiguity in sentences like "All of the blond people are not nice". 
 
 ~~~~
 var makeObj = function() {

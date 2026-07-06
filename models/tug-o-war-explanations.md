@@ -4,10 +4,9 @@ title: Tug of War Explanations
 model-status: code
 model-language: webppl
 model-language-version: pre-v0.7
+model-category: Graphical Models and Causality
 ---
 
-<script src="http://web.stanford.edu/~erindb/webppl-viz/webppl.min.js"></script>  
-<link rel="stylesheet" href="http://web.stanford.edu/~erindb/webppl-viz/viz.css">
 
 * toc
 {:toc}
@@ -273,7 +272,7 @@ vizPrint(Enumerate(inference));
 
 ## Pragmatics
 
-As we add pragmatics and increase rationality and cost of explaining, the probabitliy that Alice is weak and Bob is strong increases.
+As we add pragmatics and increase rationality and cost of explaining, the probability that Alice is weak and Bob is strong increases.
 
 Our alternative utterances include a bunch of different explanations for why Alice won.  Here are the different explanations and my intuition of what they mean:
 

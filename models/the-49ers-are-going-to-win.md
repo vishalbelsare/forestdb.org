@@ -1,11 +1,14 @@
 ---
+title: "Motivated Belief: The 49ers Are Going To Win"
 layout: model
 model-language: church
+model-category: Language and Pragmatics
+model-status: code
 ---
 
 # The 49ers are *going* to win
 
-###(...because I want them to)
+### (...because I want them to)
 
 Imagine people believe what they want to believe, or at least are more *likely* to believe things they want to be true.
 
@@ -20,7 +23,7 @@ Imagine people believe what they want to believe, or at least are more *likely* 
 (barplot (biased-beliefs 'whatevs) "my prior beliefs if i don't care")
 ~~~~
 
-Even with this preference, they can still infer that an undesired outcome has occured if they have enough evidence.
+Even with this preference, they can still infer that an undesired outcome has occurred if they have enough evidence.
 
 ~~~~
 ;;;fold:
@@ -74,7 +77,7 @@ But this will color people's inferences.
          "...but not if i don't.")
 ~~~~
 
-A literal listener can infer what the someone wants and what they believe based on what they assert and what evidence they have access to. That is, if the speaker asserts something they don't have good evidence for, it's probably because they want it to be true and therefore consider it *a priori* more likely.
+A literal listener can infer what someone wants and what they believe based on what they assert and what evidence they have access to. That is, if the speaker asserts something they don't have good evidence for, it's probably because they want it to be true and therefore consider it *a priori* more likely.
 
 ~~~~
 ;;;fold:

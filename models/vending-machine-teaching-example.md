@@ -1,8 +1,13 @@
 ---
 layout: model
-title: SAILORS teaching example
+title: Vending Machine Teaching Example
 model-language: church
+model-category: Agents, Games, and Social Reasoning
+model-status: code
 ---
+
+A teaching example introducing Bayesian inference through a vending machine that returns a cookie or bagel each time a button is pressed. The exercises walk through generative models of button presses and outcomes, then use Bayes' rule to infer, from an observed cookie or bagel, which button a child named Amy most likely pressed.
+
 ### Outline
 - Probability and why it's useful in a world where there is often uncertainty
 - Generative models and why they're useful for describing situations that often involve uncertainty
@@ -16,11 +21,11 @@ model-language: church
 - Bayes' rule is used A LOT in both AI and cognitive science
   * Medical diagnosis
   * Spam detection
-  * etc
+  * etc.
 
 ### Motivation
 
-Humans are very quite good at reasoning about other people. In particular, humans are very good at reasoning about other people's goals and preferences, even when these goals and preferences are not directly observable. How are people so good at this? If we understand how *people* do it, maybe we would be able to build smarter machines that can learn about people's goals and preferences and respond to them in smarter ways.
+Humans are quite good at reasoning about other people. In particular, humans are very good at reasoning about other people's goals and preferences, even when these goals and preferences are not directly observable. How are people so good at this? If we understand how *people* do it, maybe we would be able to build smarter machines that can learn about people's goals and preferences and respond to them in smarter ways.
 
 ### Generative Model of a Vending Machine
 
@@ -72,7 +77,7 @@ What is the probability that Amy gets a cookie?
           (condition #t)))
 ~~~
 
-### Bayes Rule! Conditioning on observations.
+### Bayes' Rule! Conditioning on observations.
 
 Let's say Amy pressed a button and got a cookie. We want to guess what button she pressed.
 

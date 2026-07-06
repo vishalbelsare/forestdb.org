@@ -1,7 +1,9 @@
 ---
 layout: model
-title: Jimenez, Marquez, Rosales Irony Extension
+title: Irony with Continuous Arousal
 model-language: webppl
+model-category: Language and Pragmatics
+model-status: code
 ---
 
 ### An extension of the Kao and Goodman (2015) Irony model
@@ -9,7 +11,7 @@ model-language: webppl
 *Authors: Abimael Hernandez Jimenez, Paula Aruby Marquez, and Cesar Manuel Rosales Jr.*
 
 ~~~~
-/old
+//old
 var states = ['terrible', 'ok', 'amazing']
 
 //new

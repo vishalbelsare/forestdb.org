@@ -1,12 +1,14 @@
 ---
 layout: model
-title: Counterfactuals
+title: Embedded Counterfactuals
 model-language: church
+model-category: Graphical Models and Causality
+model-status: code
 ---
 
-Should counterfactual reasoning invlove an embedded query?
+Should counterfactual reasoning involve an embedded query? This Church model compares two ways of answering that for binary variables A, B, C, and D, all true in the actual world: one nests a fresh enumeration-query over a shadow copy of the causal model, the other conditions the actual and counterfactual constraints together in a single query.
 
-For the following background knowlege and counterfactual inference, these can give different counterfactual predicitons.
+For the following background knowledge and counterfactual inference, these can give different counterfactual predictions.
 
 Here's the functional causal model of the situation:
 
@@ -102,7 +104,7 @@ Lucas & Kemp reported 0.43 as the prediction of their model in this case.
 
 ## Notes/Questions
 
-* How do we deal with somehting like, "A because (B because C)" if we don't have an embedded inference?
+* How do we deal with something like, "A because (B because C)" if we don't have an embedded inference?
 	- Maybe we could have `shadow-vars` *and* `shadow-shadow-vars`.
 * In what kinds of situations would there be a greater difference between the two kinds of models? What's driving this difference?
 * Which of these is a better fit to the data?

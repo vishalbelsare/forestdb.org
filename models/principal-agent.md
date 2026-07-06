@@ -1,11 +1,13 @@
 ---
 layout: model
 title: The Principal-Agent Problem for Delegation-as-Prediction
+model-status: code
 model-language: webppl
 model-language-version: pre-v0.7
+model-category: Agents, Games, and Social Reasoning
 ---
 
-Follow-up to:
+This model is a follow-up to Scoring Rules, extending the analysis of truthful prediction to settings where an agent's report can influence, rather than merely predict, which event actually occurs.
 
 - [Scoring Rules](/models/scoring-rules.html)
 
@@ -82,7 +84,7 @@ print(getReportedDistForParams({
 }))
 ~~~~
 
-We move to partial (stochastic) supervision, and in the unsupervised case, it is the agent's prediction determines what happens. Now utilities skew predictions:
+We move to partial (stochastic) supervision, and in the unsupervised case, it is the agent's prediction that determines what happens. Now utilities skew predictions:
 
 ~~~~
 ///fold:

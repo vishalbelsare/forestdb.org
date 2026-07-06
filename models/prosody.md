@@ -1,12 +1,13 @@
 ---
 layout: model
 title: Prosody
-model-status: code-fail
-model-status-verbose: The model times out
-model-category: Reasoning about Reasoning
+model-status: code
+model-category: Language and Pragmatics
 model-tags: linguistics, pragmatics
 model-language: church
 ---
+
+WARNING: this box may take ~10-30s to run.
 
 	(define (filter pred lst)
 	  (fold (lambda (x y)

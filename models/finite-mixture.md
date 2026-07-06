@@ -2,10 +2,12 @@
 layout: model
 title: Finite Mixture Model
 model-status: code
-model-category: Machine Learning
+model-category: Regression and Statistical Learning
 model-tags: shred, benchmark, machine learning
 model-language: church
 ---
+
+Four objects get sorted here into a handful of latent categories, each carrying its own emission weight, and noisy observed features are matched to them through a soft equality constraint. Metropolis-Hastings inference then recovers a posterior over how the objects cluster.
 
     (define (zip xs1 xs2) 
       (if (or (is_null xs1) (is_null xs2)) '() 
@@ -48,7 +50,7 @@ model-language: church
     
     samples
 
-References 
+References:
 
 - Cite:shred2014
-- Source: [shred](https://github.com/LFY/shred/blob/master/benchmarks/mixture.ss)
+- Source: [shred](https://web.archive.org/web/2015/https://github.com/LFY/shred/blob/master/benchmarks/mixture.ss)

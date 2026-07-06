@@ -4,10 +4,9 @@ title: Explanations Model in WebPPL
 model-status: code
 model-language: webppl
 model-language-version: pre-v0.7
+model-category: Graphical Models and Causality
 ---
 
-<script src='http://web.stanford.edu/~erindb/webppl-viz/webppl.min.js'></script>  
-<link rel='stylesheet' href='http://web.stanford.edu/~erindb/webppl-viz/viz.css'>
 
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -278,6 +277,11 @@ var vars = stories.bacon.vars;
 // for counterfactual simulation,
 // sometimes (with probability "stickiness") sample the actual
 // random statue variable. othertimes, sample a new one from the prior
+var mapObj = function(fn, obj) {
+  return _.object(map(function(kv) { return [kv[0], fn(kv[1], kv[0])]; },
+                      _.pairs(obj)));
+};
+
 var stickyRand = function(actualRVs) {
   var freshRVs = rand();
   return mapObject(function(key, val) {
@@ -480,6 +484,11 @@ var vars = function(rVs) {
 // parameter for how similar counterfactual world is to actual world
 var stickiness = 0.5;
 
+var mapObj = function(fn, obj) {
+  return _.object(map(function(kv) { return [kv[0], fn(kv[1], kv[0])]; },
+                      _.pairs(obj)));
+};
+
 var stickyRand = function(actualRVs) {
   var freshRVs = rand();
   return mapObj(function(val, key) {
@@ -551,6 +560,11 @@ var vars = function(rVs) {
 
 // parameter for how similar counterfactual world is to actual world
 var stickiness = 0.5;
+
+var mapObj = function(fn, obj) {
+  return _.object(map(function(kv) { return [kv[0], fn(kv[1], kv[0])]; },
+                      _.pairs(obj)));
+};
 
 var stickyRand = function(actualRVs) {
   var freshRVs = rand();
@@ -692,6 +706,11 @@ var vars = function(rVs) {
 
 // parameter for how similar counterfactual world is to actual world
 var stickiness = 0.5;
+
+var mapObj = function(fn, obj) {
+  return _.object(map(function(kv) { return [kv[0], fn(kv[1], kv[0])]; },
+                      _.pairs(obj)));
+};
 
 var stickyRand = function(actualRVs) {
   var freshRVs = rand();
@@ -968,6 +987,11 @@ var vars = function(rVs) {
 // parameter for how similar counterfactual world is to actual world
 var stickiness = 0.5;
 
+var mapObj = function(fn, obj) {
+  return _.object(map(function(kv) { return [kv[0], fn(kv[1], kv[0])]; },
+                      _.pairs(obj)));
+};
+
 var stickyRand = function(actualRVs) {
   var freshRVs = rand();
   return mapObj(function(val, key) {
@@ -1224,6 +1248,11 @@ var vars = function(rVs) {
 
 // parameter for how similar counterfactual world is to actual world
 var stickiness = 0.5;
+
+var mapObj = function(fn, obj) {
+  return _.object(map(function(kv) { return [kv[0], fn(kv[1], kv[0])]; },
+                      _.pairs(obj)));
+};
 
 var stickyRand = function(actualRVs) {
   var freshRVs = rand();

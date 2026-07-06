@@ -2,6 +2,8 @@
 layout: model
 title: Explanations with 'because'
 model-language: church
+model-category: Graphical Models and Causality
+model-status: code
 ---
 
 ### Pragmatic explainer
@@ -11,7 +13,7 @@ We model an informative speaker trying to communicate the world state (all top-l
 
 #### The literal meaning of "because"
 
-The meaning of "A because B" is both the presuppositions -- "A" and "B" -- and the counterfactual "if B had not happened then A would not have happened". The counterfactual is implemented by creating "shadow" world where each top-level (i.e. defined) variable in the model has its actual-world value with `eps` probability and a fresh value otherwise. In this shadow world we evaluate a conditional query to see if "shadow-A" changes when "shadow-B" is conditioned to be false.
+The meaning of "A because B" is both the presuppositions -- "A" and "B" -- and the counterfactual "if B had not happened then A would not have happened". The counterfactual is implemented by creating a "shadow" world where each top-level (i.e. defined) variable in the model has its actual-world value with `eps` probability and a fresh value otherwise. In this shadow world we evaluate a conditional query to see if "shadow-A" changes when "shadow-B" is conditioned to be false.
 
 To construct the shadow-world query we use a bunch of helpers for splicing, wrapping definitions, and renaming variables. Here it is, with an example:
 

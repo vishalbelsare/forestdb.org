@@ -2,7 +2,7 @@
 layout: model
 title: CrossCat
 model-status: code
-model-category: Nonparametric Models
+model-category: Bayesian Nonparametrics
 model-tags: nonparametric models, categorization
 model-language: church
 ---
@@ -49,4 +49,4 @@ References:
 
 - Cite:Shafto2006tz
 - Cite:ProbMods
-- [CrossCat at MIT](http://probcomp.csail.mit.edu/crosscat/)
+- [CrossCat at MIT](https://github.com/probcomp/crosscat)

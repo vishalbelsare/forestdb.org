@@ -2,10 +2,12 @@
 layout: model
 title: Generics across generations
 model-status: hidden
-model-category: Miscellaneous
+model-category: Language and Pragmatics
 model-language: webppl
 model-language-version: v0.9.6
 ---
+
+This model traces generic statements across generations of speakers and listeners. It asks whether linguistic transmission can preserve a generic belief about a rare property while agents still represent that property as uncommon.
 
 # Question
 
@@ -18,12 +20,12 @@ You learned this through language.
 But then how did they learn that?
 Through language as well, and up through the generations, until somebody (or a collective of people over time) gathered data and drew the generalization.
 
-This model explores what happens when an observer gathers data (positive and negative examples of something), makes some infernece about the prevalence of the positive examples (e.g., the prevalence of the feature in the kind), and then decides whether or not to say a generic statement to a listener who shares his prior beliefs.
+This model explores what happens when an observer gathers data (positive and negative examples of something), makes some inference about the prevalence of the positive examples (e.g., the prevalence of the feature in the kind), and then decides whether or not to say a generic statement to a listener who shares his prior beliefs.
 
 Then, a population of listeners, having been exposed to the population of speakers represented by the probability distribution over producing the generic, updates their beliefs about the prevalence, and decides whether or not to say the generic. And on and on.
 
 The prior here is a hypothetical prior over some rare property (e.g., carrying malaria). 
-The question is: can intergenerational transmission retain the belief in the generic utterance (e.g., "Mosquitos carry malaria") while still appreciating that not-all (or even, not many) mosquitos carry malaria.
+The question is: can intergenerational transmission retain the belief in the generic utterance (e.g., "Mosquitos carry malaria") while still appreciating that not-all (or even, not many) mosquitos carry malaria?
 
 ~~~~
 ///fold:

@@ -2,13 +2,13 @@
 layout: model
 title: Scalar Implicature with Varying QUD
 model-status: code
-model-category: Reasoning about Reasoning
+model-category: Language and Pragmatics
 model-tags: linguistics, pragmatics, theory of mind
 model-language: webppl
 ---
 
 
-Let's enrich the basic scalar implicature model such that the speaker is addressing one of two different QUDs, where the QUD is known to the listener. The scenario is the apple scenario from Goodman & Stuhlmueller 2013; the potential QUD's are "Are all of the apples red?" and "Are any of the apples red?".
+Let's enrich the basic scalar implicature model such that the speaker is addressing one of two different QUDs, where the QUD is known to the listener. The scenario is the apple scenario from Goodman & Stuhlmueller 2013; the potential QUDs are "Are all of the apples red?" and "Are any of the apples red?".
 
 ~~~~
 // possible states of the world

@@ -4,12 +4,13 @@ title: Generics with causal background knowledge
 model-status: code
 model-language: webppl
 model-language-version: pre-v0.7
+model-category: Language and Pragmatics
 ---
 
 Contrasting "Butterflies have dust on their wings" vs. "This butterfly has dust on its wings"
 
 
-Here, the specific utterance ("This butterfly...") is operationlized as the smallest value on the prevalence scale. Perhaps that is too much of a simplification.
+Here, the specific utterance ("This butterfly...") is operationalized as the smallest value on the prevalence scale. Perhaps that is too much of a simplification.
 
 
 ~~~~
@@ -107,7 +108,7 @@ print(
 
 
 
-Here, the specific utterance ("This butterfly...") is actually taken to mean that something more like "this butterfly has...", `flip(P(f|k))`. However, to work as we might expect, it needs to be a presupposition-y model....
+Here, the specific utterance ("This butterfly...") is actually taken to mean something more like "this butterfly has...", `flip(P(f|k))`. However, to work as we might expect, it needs to be a presupposition-y model....
 
 ~~~~
 ///fold:

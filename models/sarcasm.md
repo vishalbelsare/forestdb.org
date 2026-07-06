@@ -3,6 +3,7 @@ layout: model
 title: Basic sarcasm
 model-status: code
 model-language: church
+model-category: Language and Pragmatics
 ---
 
       ; Five possible movie states

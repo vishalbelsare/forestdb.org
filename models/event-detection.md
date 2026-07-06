@@ -2,12 +2,12 @@
 layout: model
 title: Event Detection
 model-status: code
-model-category: Miscellaneous
+model-category: Time Series and Stochastic Processes
 model-tags: poisson
 model-language: church
 ---
 
-Assuming there is a behavior with a certain frequency over time, and given some data about that behavior, do you think something happened to change that behavior at some point? This formulation could apply to changes in missile attacks on Israel, but the same idea applies to changes in personal behavior. For example, suppose you usually send your friend some messages per month, but something happened and now you send more/less. When did something happen? Did something actually happen?
+Given a monthly count of some behavior, such as texts sent to a friend, did something happen at some point that changed its underlying rate? The model samples a boolean something-happened?, a change month, and two Poisson rates, generates monthly counts accordingly, and a simplified second version conditions on fixed data to infer the change month via MCMC.
 
     (define (zip l1 l2) (map list l1 l2))
     
@@ -80,5 +80,5 @@ Conditioning using single-site MCMC doesn't work very well in this model. Here i
 
 References:
 
-- [Switchpoint detection in PyMC](http://nbviewer.ipython.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Chapter1_Introduction.ipynb)
-- Model by [Tomer Ullman](http://www.mit.edu/~tomeru/)
+- [Switchpoint detection in PyMC](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)
+- Model by [Tomer Ullman](https://www.tomerullman.org/)

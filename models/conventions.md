@@ -1,8 +1,10 @@
 ---
 layout: model
 title: Conventions
+model-status: code
 model-language: webppl
 model-language-version: v0.9.15
+model-category: Language and Pragmatics
 ---
 
 # Increase in efficiency
@@ -185,7 +187,7 @@ viz.line(_.range(params.numTrials), globalStore.longUtteranceProbs)
 
 # Old versions
 
-Why do Americans drive on the right side of the road while the British drive on the left? Why do English speakers use 'cat' to refer to a pet that goes 'meow' while the French use the word `chat'? These conventions or norms govern much of our everyday behavior. While there is a substantial literature using simple agent-based models showing how these arbitrary but stable patterns can emerge in large populations, there has been comparatively less work on the cognitive underpinnings of conventions.
+Why do Americans drive on the right side of the road while the British drive on the left? Why do English speakers use 'cat' to refer to a pet that goes 'meow' while the French use the word 'chat'? These conventions or norms govern much of our everyday behavior. While there is a substantial literature using simple agent-based models showing how these arbitrary but stable patterns can emerge in large populations, there has been comparatively less work on the cognitive underpinnings of conventions.
 
 Here, we focus on a classic case of conventionalization of language in a reference game (Clark & Wilkes-Gibbs, 1986). In the simplest version of this task, two players are presented with an array of objects constructed from tangrams which are not easily describable. One of them is designated as the 'target' for the speaker, and their goal is to produce an utterance that will allow the listener to distinguish the correct object from their array. 
 
@@ -324,7 +326,7 @@ The listener is initially uncertain about which tangram 'label1' is referring to
 
 ### Part 2: Dropping redundant information (conjunctions and modifiers)
 
-In our data, several of the most frequently dropped utterances between the first round and the last round are modifying clauses. We account for this in an RSA model by enriching the lexicon with compositional semantics. In addition to bare labels, the speaker can form conjunctions of labels which have a meaning derived from the individual label meanings in the lexicon. We also introduce some initial bias for some labels toward one tangrams and other labels toward the other tangram. The intended behavior is that speakers are initially more likely to form conjunctions of the two labels with a bias toward the target tangram, in effect hedging against the possibility that they're in a world where one or the other of those labels don't turn out to mean the target tangram. As uncertainty over the lexicon decreases over multiple rounds, however, this information will become redundant and the benefit of hedging will not be worth the additional utterance cost. 
+In our data, several of the most frequently dropped utterances between the first round and the last round are modifying clauses. We account for this in an RSA model by enriching the lexicon with compositional semantics. In addition to bare labels, the speaker can form conjunctions of labels which have a meaning derived from the individual label meanings in the lexicon. We also introduce some initial bias for some labels toward one tangram and other labels toward the other tangram. The intended behavior is that speakers are initially more likely to form conjunctions of the two labels with a bias toward the target tangram, in effect hedging against the possibility that they're in a world where one or the other of those labels doesn't turn out to mean the target tangram. As uncertainty over the lexicon decreases over multiple rounds, however, this information will become redundant and the benefit of hedging will not be worth the additional utterance cost. 
 
 ~~~~
 ///fold:
@@ -478,7 +480,7 @@ We see that there's an initial preference for the longer conjunction of "type_a"
 
 (2) the conjunction hedges against unlikely but possible lexicons where one or the other utterance actually corresponds to a property with value 1. 
 
-After observing an example of this conjunction referring to the first state, the conjunction actually becomes *more* preferred by the speaker, as it increases the probability of utterances where both type_a and color_a mean the first state. The evidence is indeterminate about the separate meanings of type_a and color_a. Because of cost considerations, however, the shorter utterances are still assigned some probability. Once the speaker produces one or the other short utterances by chance, then, it breaks the symmetry and this shorter utterance becomes the most probable in future rounds.
+After observing an example of this conjunction referring to the first state, the conjunction actually becomes *more* preferred by the speaker, as it increases the probability of utterances where both type_a and color_a mean the first state. The evidence is indeterminate about the separate meanings of type_a and color_a. Because of cost considerations, however, the shorter utterances are still assigned some probability. Once the speaker produces one or the other short utterance by chance, then, it breaks the symmetry and this shorter utterance becomes the most probable in future rounds.
 
 <!-- 
 ### Part 3: Shortening arbitrary utterances
@@ -563,7 +565,7 @@ var lexiconPrior = Infer({method: 'enumerate'}, function(){
     var t1Prob = categorical({vs: [0.01, 0.25, .5, .75, .99], ps: t1Ps})
     return {'t1' : t1Prob, 't2' : 1-t1Prob};
   }, grammaticalUtts);
-  return _.object(grammaticalUtts, meanings);
+  return _.zipObject(grammaticalUtts, meanings);
 });
 
 // length-based cost 
@@ -605,7 +607,7 @@ var L0 = cache(function(utt, lexicon) {
     var state = sample(statePrior);
     var intendedUtt = sample(utterancePrior)
 
-    var noiseScore = (_.contains(noiseModel(intendedUtt).support(), utt) ?
+    var noiseScore = (_.includes(noiseModel(intendedUtt).support(), utt) ?
                       noiseModel(intendedUtt).score(utt) :
                       -100)
     factor(Math.log(lexicon[intendedUtt][state]) + noiseScore);

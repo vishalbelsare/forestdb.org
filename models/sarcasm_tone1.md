@@ -3,7 +3,11 @@ layout: model
 title: Sarcasm with tone as goal signal
 model-status: code
 model-language: church
+model-category: Language and Pragmatics
 ---
+
+This model treats a drawn-out tone as evidence that a sarcastic speaker is trying to communicate emotional arousal. A pragmatic listener combines the utterance and tone to infer the underlying movie state.
+
     ; Five possible movie states
     (define states
       (list 'terrible 'bad 'ok 'good 'amazing))
@@ -46,7 +50,7 @@ model-language: church
         (('g-arousal) (equal? (third listener-interp) (third speaker-world)))
             ))
     
-    ;; Define list of possible utterances (same as price states)
+    ;; Define list of possible utterances (same as movie states)
     (define utterances states)
     
     (define (utterance-prior)
@@ -54,12 +58,12 @@ model-language: church
     
     (define tones (list 'drawl 'plain))
     
-    ;; Literal interpretation "meaning" function, just check if uttered number reflects price state
+    ;; Literal interpretation "meaning" function, just check if uttered word reflects movie state
     (define (literal-interpretation utterance state)
       (equal? utterance state))
     
     
-    ;; Pragmatic listener, jointly infers the price state, speaker valence, and QUD
+    ;; Pragmatic listener, jointly infers the movie state, speaker valence, and QUD
     (define L1
       (mem
        (lambda (utterance tone)

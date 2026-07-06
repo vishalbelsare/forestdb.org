@@ -2,12 +2,14 @@
 layout: model
 title: Bayesian Linear Regression
 model-status: code
-model-category: PPAML Challenge Problems
+model-category: Regression and Statistical Learning
 model-tags: shred, benchmark, machine learning
 model-language: church
 ---
 
-Version 1 (based on [Anglican](http://www.robots.ox.ac.uk/~fwood/anglican/examples/linear_regression/)):
+Paired input-output data get fit to a line here by placing priors on the slope and intercept and conditioning on the observed points through a Gaussian likelihood. The two versions below use different priors and datasets, but both rely on Metropolis-Hastings to recover the posterior over the regression parameters.
+
+Version 1 (based on [Anglican](https://probprog.github.io/anglican/examples/viewer/?worksheet=linear)):
 
     (define xs '(0 1 2 3))
     (define ys '(0 1 4 6))
@@ -69,4 +71,4 @@ Version 2 (based on [shred](http://lfy.github.io/shred.pdf)):
 References 
 
 - Cite:shred2014
-- [Linear regression in Anglican](http://www.robots.ox.ac.uk/~fwood/anglican/examples/linear_regression/)
+- [Linear regression in Anglican](https://probprog.github.io/anglican/examples/viewer/?worksheet=linear)

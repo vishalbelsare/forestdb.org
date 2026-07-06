@@ -3,22 +3,18 @@ layout: model
 title: LiquidFun Example
 model-language: webppl
 model-language-version: pre-v0.7
+model-category: Scientific and Physical Models
+model-status: code
 ---
 
-<script src="http://web.mit.edu/cjbates/www/liquidfun/liquidfun/Box2D/lfjs/liquidfun.js"></script>
+This page runs a browser-based, deterministic LiquidFun/Box2D physics simulation rather than a probabilistic program: a randomly positioned blob of fluid particles is dropped into a walled container past an obstacle and settles under gravity. It requires WebGL and is verified in-browser rather than by the headless model runner.
+
+<script src="/assets/vendor/liquidfun/liquidfun.js"></script>
 
 <!-- testbed code !-->
-<script src="http://web.mit.edu/cjbates/www/liquidfun/liquidfun/Box2D/lfjs/testbed/renderer.js"></script>
-<script src="http://web.mit.edu/cjbates/www/liquidfun/liquidfun/Box2D/lfjs/testbed/three.js"></script>
-<script src="http://web.mit.edu/cjbates/www/liquidfun/liquidfun/Box2D/lfjs/utils.js"></script>
-
-
-<script src="liquidfun.js"></script>
-
-<!-- testbed code !-->
-<script src="http://web.mit.edu/cjbates/www/liquidfun/liquidfun/Box2D/lfjs/testbed/renderer.js"></script>
-<script src="http://web.mit.edu/cjbates/www/liquidfun/liquidfun/Box2D/lfjs/testbed/three.js"></script>
-<script src="http://web.mit.edu/cjbates/www/liquidfun/liquidfun/Box2D/lfjs/testbed/utils.js"></script>
+<script src="/assets/vendor/liquidfun/testbed/renderer.js"></script>
+<script src="/assets/vendor/liquidfun/testbed/three.js"></script>
+<script src="/assets/vendor/liquidfun/testbed/utils.js"></script>
 
 <!-- *****************  modified testbed.js  *********************** !-->
 <script>

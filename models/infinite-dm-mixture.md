@@ -1,9 +1,8 @@
 ---
 layout: model
 title: Infinite Dirichlet-Multinomial Mixture
-model-status: code-fail
-model-status-verbose: Unknown error.
-model-category: Nonparametric Models
+model-status: code
+model-category: Bayesian Nonparametrics
 model-tags: mem, nonparametrics, mixture
 model-language: church
 ---
